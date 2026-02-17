@@ -1,43 +1,39 @@
-import React from 'react'
-import { links } from '../../helpers/ArregloLinks'
+import { useGSAP } from '../../composables/useGSAP';
+import { redSocial } from '../../helpers/ArregloLinks';
 
-const Menu = ({isOpen}) => {
+const SocialTicker = () => {
+  const { tickerRef, play, pause } = useGSAP();
+
+  // 30 repeticiones es excelente para cubrir cualquier resolución
+  const infinitasRedes = Array.from({ length: 30 }, () => redSocial).flat();
+
   return (
-    <div>
-      {isOpen && (
-          <div className="
-           fixed top-15 left-0 z-50 
-            py-5 w-full max-min-auto 
-            lg:hidden 
-            bg-linear-to-t to-[#430179] via-transparent from-[#430179] 
-            backdrop-blur-md
-            rounded-b-4xl mb-5
-            border-b border-white/10
-            transition-all duration-300
-          ">
-            <ul className="flex flex-col gap-8 items-center text-white">
-              {[
-                ...links, 
-                {
-                  id: 4, 
-                  name: 'Contacto', 
-                  url: '#contacto'
-                }
-              ].map((link) => (
-                <li key={link.id}>
-                  <a 
-                    href={link.url}
-                    className="relative text-xs ms:text-ms uppercase tracking-wider poppins-medium opacity-80 hover:opacity-100 transition-all duration-300 after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-pink-500/25 after:left-0 after:-bottom-1 hover:after:w-full after:transition-all"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+    <div 
+      ref={tickerRef} 
+      onMouseEnter={pause} 
+      onMouseLeave={play}
+      /* He corregido el -mt si es que causa solapamiento no deseado y asegurado el z-index */
+      className="w-full overflow-hidden border-y border-white/10 bg-white/5 py-4 z-20 -mt-[5.3rem]"
+    >
+      <div className="ticker-content inline-flex gap-10 items-center w-max">
+        {infinitasRedes.map((sesion, index) => (
+          <a 
+            key={`ticker-${index}`} // Más simple y seguro
+            target='_blank' 
+            rel='noopener noreferrer'
+            href={sesion.url}
+            /* text-white/25 es perfecto para el look "low-key" que resalta al hover */
+            className="flex items-center gap-3 text-white/25 px-4 transition-all duration-500 transform hover:text-white hover:scale-110 select-none"
+          >
+            <i className={`${sesion.icon} text-2xl`}></i>
+            <span className="uppercase tracking-widest text-sm poppins-medium whitespace-nowrap">
+              {sesion.name}
+            </span>
+          </a>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default SocialTicker;

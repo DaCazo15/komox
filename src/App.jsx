@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 import Hero from './components/Component-Hero/Hero'
 import Navbar from './components/Component-Nav/Navbar'
 import ToggleMenu from './components/UX/ToggleMenu'
-import SocialTicker from './components/UX/SocialTikcer'
+import SocialTicker from './components/UX/SocialTicker'
 import AboutUs from './components/Component-AboutUs/AboutUs'
 import Services from './components/Component-Services/Services'
 import Contact from './components/Component-Contact/Contact'
 import Footer from './components/Component-Footer/Footer'
 
 function App() {
-
-  
 
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
