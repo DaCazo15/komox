@@ -1,0 +1,19 @@
+.btn-morado-claro {
+  background: #58009f;
+  transition: all 0.5s;
+  border-radius: 9999px; /* Forma de píldora */
+  &:hover{
+    background-color: #430179;
+    transform: translateY(-2px);
+  }
+}
+
+.btn-morado-oscuro {
+  background-color: #430179;
+  transition: all 0.5s;
+  border-radius: 9999px; /* Forma de píldora */
+  &:hover {
+    background-color: #58009f;
+    transform: translateY(-2px);
+  }
+}
