@@ -1,6 +1,8 @@
 import React from 'react'
 import Personaje from '../../assets/img/Personaje.png'
 import fondo from '../../assets/img/Fondo.png'
+import { motion } from 'framer-motion'
+import { sliceUp } from '../../assets/utility/animation'
 
 const Hero = () => {
   const fondoStyle = {
@@ -38,9 +40,11 @@ const Hero = () => {
         </p>
       </div>
       <div>
-        <img/>
-        <img 
+        <motion.img 
           src={Personaje} 
+          variants={sliceUp(0.5)}
+          initial="initial"
+          animate="animate"
           alt="Personaje del sitio"
           className="
             max-h-180 h-140 w-auto 
