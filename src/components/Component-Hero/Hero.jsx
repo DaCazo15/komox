@@ -31,11 +31,12 @@ const Hero = () => {
           
           bg-size[0%_100%] bg-no-repeat bg-left bg-clip-text text-white 
           hover:text-transparent transition-all duration-700 hover:bg-size[50%_100%] hover:bg-size[100%_100%]
+          lg:text-[8rem] text-[4rem]
         "
         >
           Magic Komox
         </h1>
-        <p className="text-purple-300 text-xl md:text-2xl">
+        <p className="text-purple-300 text-xl text-[1rem] lg:text-2xl">
           Transformando ideas en software robusto.
         </p>
       </div>
