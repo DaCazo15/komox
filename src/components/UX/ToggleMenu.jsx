@@ -1,39 +1,36 @@
-import { useGSAP } from '../../composables/useGSAP';
-import { redSocial } from '../../helpers/ArregloLinks';
+import React from 'react'
+import { links } from '../../helpers/ArregloLinks'
 
-const SocialTicker = () => {
-  const { tickerRef, play, pause } = useGSAP();
-
-  // 30 repeticiones es excelente para cubrir cualquier resolución
-  const infinitasRedes = Array.from({ length: 30 }, () => redSocial).flat();
-
+const ToggleMenu = ({ isOpen, toggleMenu }) => {
   return (
-    <div 
-      ref={tickerRef} 
-      onMouseEnter={pause} 
-      onMouseLeave={play}
-      /* He corregido el -mt si es que causa solapamiento no deseado y asegurado el z-index */
-      className="w-full overflow-hidden border-y border-white/10 bg-white/5 py-4 z-20 -mt-[5.3rem]"
-    >
-      <div className="ticker-content inline-flex gap-10 items-center w-max">
-        {infinitasRedes.map((sesion, index) => (
-          <a 
-            key={`ticker-${index}`} // Más simple y seguro
-            target='_blank' 
-            rel='noopener noreferrer'
-            href={sesion.url}
-            /* text-white/25 es perfecto para el look "low-key" que resalta al hover */
-            className="flex items-center gap-3 text-white/25 px-4 transition-all duration-500 transform hover:text-white hover:scale-110 select-none"
-          >
-            <i className={`${sesion.icon} text-2xl`}></i>
-            <span className="uppercase tracking-widest text-sm poppins-medium whitespace-nowrap">
-              {sesion.name}
-            </span>
-          </a>
+    <div className={`
+      /* Posicionamiento fijo para cubrir toda la pantalla */
+      fixed inset-0 z-40 bg-linear-to-b from-[#430179] via-transparent to-[#0a0a0a] backdrop-blur-md
+      flex flex-col items-center justify-center lg:hidden
+      transition-all duration-500 ease-in-out
+      /* Manejo de visibilidad basado en el estado */
+      ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}
+    `}>
+      
+      <ul className="flex flex-col gap-8 items-center">
+        {[...links, {id:4, name: 'Contacto', url: '#contacto'}].map((link) => (
+          <li key={link.id}>
+            <a 
+              href={link.url}
+              onClick={toggleMenu} /* Importante: cerrar el menú al hacer clic */
+              className="
+                text-3xl uppercase tracking-[0.2em] poppins-bold
+                text-white opacity-80 hover:opacity-100 hover:text-purple-500
+                transition-all duration-300
+              "
+            >
+              {link.name}
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
-  );
-};
+  )
+}
 
-export default SocialTicker;
+export default ToggleMenu

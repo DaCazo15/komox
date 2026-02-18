@@ -20,7 +20,7 @@ function App() {
       <div className='flex flex-col min-h-screen items-center'>
 
         <Navbar isOpen={isOpen} toggleMenu={toggleMenu} />
-        <ToggleMenu isOpen={isOpen} />
+        <ToggleMenu isOpen={isOpen} toggleMenu={toggleMenu} />
         <Hero />
         <SocialTicker />
         <AboutUs />
